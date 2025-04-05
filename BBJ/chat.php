@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    $api_key = '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';
+    $api_key = 'YOUR_API';
 
     $prompt = "You are a helpful tutor bot.\nUser: " . $user_message . "\nAI:";
 
