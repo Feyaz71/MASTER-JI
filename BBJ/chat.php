@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ];
 
     $context = stream_context_create($options);
-    $response = file_get_contents("https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1", false, $context);
+    // $response = file_get_contents("https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1", false, $context);
     $responseData = json_decode($response, true);
 
     if (isset($responseData[0]['generated_text'])) {
