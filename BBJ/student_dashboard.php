@@ -36,6 +36,7 @@ $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $classes = $stmt->get_result();
+$current_page = basename($_SERVER['PHP_SELF']);
 
 // Display notifications if available
 if (!empty($_SESSION["notification"])) {
@@ -62,14 +63,14 @@ if (!empty($_SESSION["notification"])) {
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #e7ddff;
             display: flex;
         }
 
         .sidebar {
             width: 250px;
             height: 100vh;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             padding: 20px;
             position: fixed;
@@ -93,9 +94,14 @@ if (!empty($_SESSION["notification"])) {
             transition: background 0.3s;
             margin-bottom: 10px;
         }
-
+/* 
         .sidebar a:hover {
             background-color: #3949ab;
+        } */
+
+        .sidebar a.active{
+            background-color:  white;
+            color: #4d2aa7;
         }
 
         .content {
@@ -114,7 +120,7 @@ if (!empty($_SESSION["notification"])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             padding: 12px 25px;
             border-radius: 8px;
@@ -127,7 +133,7 @@ if (!empty($_SESSION["notification"])) {
         }
 
         .toggle-button:hover {
-            background-color: #3949ab;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.568);
         }
 
         .class-list {
@@ -172,7 +178,7 @@ if (!empty($_SESSION["notification"])) {
         .class-card a {
             display: inline-block;
             padding: 8px 12px;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -180,7 +186,7 @@ if (!empty($_SESSION["notification"])) {
         }
 
         .class-card a:hover {
-            background-color: #3949ab;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -188,15 +194,15 @@ if (!empty($_SESSION["notification"])) {
 
 <div class="sidebar">
     <h2>Student Panel</h2>
-    <a href="student_dashboard.php">🏠 Home</a>
-    <a href="join_class.php">📚 Join Class</a>
-    <a href="profile.php">👤 Profile</a>
-    <a href="logout.php">🚪 Logout</a>
+    <a href="student_dashboard.php" class="<?= ($current_page == 'student_dashboard.php')?'active':'' ?>">🏠 Home</a>
+    <a href="join_class.php" class="<?= ($current_page == 'join_class.php')?'active':'' ?>">📚 Join Class</a>
+    <a href="profile.php" class="<?= ($current_page == 'profile.php')?'active':'' ?>">👤 Profile</a>
+    <a href="logout.php" class="<?= ($current_page == 'logout.php')?'active':'' ?>">🚪 Logout</a>
 </div>
 
 <h1 style="
     width: calc(100% - 250px); 
-    background-color: #1a237e; 
+    background-color: #4d2aa7; 
     color: white; 
     padding: 15px 0; 
     text-align: center; 

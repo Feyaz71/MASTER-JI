@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "⚠️ Please enter a valid class name!";
     }
 }
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         body {
-            background-color: #f0f4f9;
+            background-color: #e7ddff;
             display: flex;
             height: 100vh;
         }
@@ -66,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Sidebar */
         .sidebar {
             width: 250px;
-            background-color: #1a237e; /* Google Classroom-style blue */
+            background-color: #4d2aa7; /* Google Classroom-style blue */
             color: white;
             padding: 20px;
             position: fixed;
@@ -92,9 +93,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             transition: background 0.3s;
             margin-bottom: 10px;
         }
-
+/* 
         .sidebar a:hover {
             background-color: #3949ab;
+        } */
+        
+        .sidebar a.active{
+            background-color:  white;
+            color: #4d2aa7;
         }
 
         /* Content Area */
@@ -165,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: inline-block;
             margin-top: 15px;
             text-decoration: none;
-            color: #1a237e;
+            color: #4d2aa7;
             font-weight: bold;
         }
     </style>
@@ -175,10 +181,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Sidebar -->
 <div class="sidebar">
     <h2>Teacher Panel</h2>
-    <a href="dashboard.php">🏠 Home</a>
-    <a href="create_class.php">✒️ Create Class</a>
-    <a href="profile.php">👤 Profile</a>
-    <a href="logout.php">🚪 Logout</a>
+    <a href="dashboard.php" class="<?= ($current_page == 'dashboard.php')?'active':'' ?>">🏠 Home</a>
+    <a href="create_class.php" class="<?= ($current_page == 'create_class.php')?'active':'' ?>">✒️ Create Class</a>
+    <a href="profile.php" class="<?= ($current_page == 'profile.php')?'active':'' ?>">👤 Profile</a>
+    <a href="logout.php" class="<?= ($current_page == 'logout.php')?'active':'' ?>">🚪 Logout</a>
 </div>
 
 <!-- Main Content -->

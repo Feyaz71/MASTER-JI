@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["request_id"])) {
     <title>Manage Join Requests</title>
     <style>
         * { font-family: Arial, sans-serif; }
-        body { background-color: #f5f5f5; padding: 20px; }
+        body { background-color: #e7ddff; padding: 20px; }
         h1 { color: #333; }
         .request-container {
             background: white;

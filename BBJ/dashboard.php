@@ -38,6 +38,7 @@ $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $classes = $stmt->get_result();
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@ $classes = $stmt->get_result();
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #e7ddff;
             display: flex;
         }
 
@@ -63,7 +64,7 @@ $classes = $stmt->get_result();
         .sidebar {
             width: 250px;
             height: 100vh;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             padding: 20px;
             position: fixed;
@@ -87,9 +88,14 @@ $classes = $stmt->get_result();
             transition: background 0.3s;
             margin-bottom: 10px;
         }
-
+/* 
         .sidebar a:hover {
             background-color: #3949ab;
+        } */
+
+        .sidebar a.active{
+            background-color:  white;
+            color: #4d2aa7;
         }
 
         /* Main Content */
@@ -99,18 +105,12 @@ $classes = $stmt->get_result();
             width: 100%;
         }
 
-        h1 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
         /* Centered Button */
         .toggle-button {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             padding: 12px 25px;
             border-radius: 8px;
@@ -123,7 +123,7 @@ $classes = $stmt->get_result();
         }
 
         .toggle-button:hover {
-            background-color: #3949ab;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.568);
         }
 
         /* Class Cards */
@@ -156,7 +156,7 @@ $classes = $stmt->get_result();
         .class-card a {
             display: inline-block;
             padding: 8px 12px;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -164,7 +164,7 @@ $classes = $stmt->get_result();
         }
 
         .class-card a:hover {
-            background-color: #3949ab;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -173,19 +173,19 @@ $classes = $stmt->get_result();
 <!-- Sidebar -->
 <div class="sidebar">
     <h2>Teacher Panel</h2>
-    <a href="dashboard.php">🏠 Home</a>
+    <a href="dashboard.php" class="<?= ($current_page == 'dashboard.php') ? 'active' : '' ?>">🏠 Home</a>
     <?php if ($role == "teacher"): ?>
-    <a href="create_class.php">✒️ Create Class</a>
+    <a href="create_class.php" class="<?= ($current_page == 'create_class.php')? 'active':'' ?>">✒️ Create Class</a>
     <?php elseif ($role == "student"): ?>
-        <a href="join_class.php">📚 Join Class</a>
+        <a href="join_class.php" class="<?= ($current_page == 'join_class.php')? 'active': '' ?>">📚 Join Class</a>
     <?php endif; ?>
-    <a href="profile.php">👤 Profile</a>
-    <a href="manage_requests.php">📜Join Requests</a>
-    <a href="logout.php">🚪 Logout</a>
+    <a href="profile.php" class="<?= ($current_page == 'profile.php') ? 'active':'' ?>">👤 Profile</a>
+    <a href="manage_requests.php" class="<?= ($current_page == 'manage_requests.php') ? 'active':'' ?>">📜Join Requests</a>
+    <a href="logout.php" class="<?= ($current_page == 'logout.php') ? 'active':'' ?>">🚪 Logout</a>
 </div>
 <h1 style="
     width: calc(100% - 250px); 
-    background-color: #1a237e; 
+    background-color: #4d2aa7;
     color: white; 
     padding: 15px 0; 
     text-align: center; 
@@ -226,6 +226,8 @@ $classes = $stmt->get_result();
         var classList = document.getElementById("classList");
         classList.style.display = (classList.style.display === "none" || classList.style.display === "") ? "grid" : "none";
     }
+
+
 </script>
 
 

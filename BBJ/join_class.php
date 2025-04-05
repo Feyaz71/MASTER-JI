@@ -37,6 +37,8 @@ $query = "SELECT classes.id, classes.class_name, users.name AS teacher_name
           WHERE classes.status != 'deleted'";
 
 $classes = $conn->query($query);
+
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -54,14 +56,14 @@ $classes = $conn->query($query);
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #e7ddff;
             display: flex;
         }
 
         .sidebar {
             width: 250px;
             height: 100vh;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             padding: 20px;
             position: fixed;
@@ -86,8 +88,13 @@ $classes = $conn->query($query);
             margin-bottom: 10px;
         }
 
-        .sidebar a:hover {
+        /* .sidebar a:hover {
             background-color: #3949ab;
+        } */
+        
+        .sidebar a.active{
+            background-color:  white;
+            color: #4d2aa7;
         }
 
         .content {
@@ -128,14 +135,14 @@ $classes = $conn->query($query);
             border-radius: 5px;
             border: none;
             font-size: 16px;
-            background-color: #1a237e;
+            background-color: #4d2aa7;
             color: white;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         button:hover {
-            background-color: #3949ab;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.568);
         }
     </style>
 </head>
@@ -143,10 +150,10 @@ $classes = $conn->query($query);
 
 <div class="sidebar">
     <h2>Student Panel</h2>
-    <a href="student_dashboard.php">🏠 Home</a>
-    <a href="join_class.php">📚 Join Class</a>
-    <a href="profile.php">👤 Profile</a>
-    <a href="logout.php">🚪 Logout</a>
+    <a href="student_dashboard.php" class="<?= ($current_page == 'student_dashboard.php') ? 'active' : '' ?>">🏠 Home</a>
+    <a href="join_class.php" class="<?= ($current_page == 'join_class.php')?'active':'' ?>">📚 Join Class</a>
+    <a href="profile.php" class="<?= ($current_page == 'profile.php')?'active':'' ?>">👤 Profile</a>
+    <a href="logout.php" class="<?= ($current_page == 'logout.php')?'active':'' ?>">🚪 Logout</a>
 </div>
 
 <div class="content">
